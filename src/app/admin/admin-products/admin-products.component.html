@@ -1,0 +1,58 @@
+<p>
+  <a routerLink="/admin/products/new" class="btn btn-primary">Nuevo Producto</a>
+</p>
+<br>
+
+<div ngbDropdown class="dropdown show">
+    <a ngbDropdownToggle class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{categoriactual}}
+    </a>
+  
+    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <a  class="list-group-item list-group-item-action" routerLink="/admin/products">Todos</a>
+      <a *ngFor="let item of categorias$ | async" 
+      routerLink="/admin/products"
+      class="list-group-item list-group-item-action"
+      [queryParams]="{parametrocategoria: item.name }">{{item.name}}</a>
+    </div>
+</div>
+<br>
+<input 
+  #consulta
+
+  (keyup)="filtro(consulta.value)"
+
+  type="text" class="form-control"
+
+  placeholder="Buscar">
+
+<br>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Categoria</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prod of  arrayproductofiltrados">
+      <td>
+        {{prod.nombre}}
+      </td>
+      <td>
+        {{prod.precio}}  €
+      </td>
+      <td>
+        {{prod.categoria}} 
+      </td>
+      <td>
+        <a [routerLink]="['/admin/products/', prod.$key]">Editar Producto</a>
+      </td>
+
+    </tr>
+  </tbody>
+
+</table>

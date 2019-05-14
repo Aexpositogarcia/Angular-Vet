@@ -1,0 +1,27 @@
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Propietario</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of  todos$">
+        <td>
+          {{prod.nombre}}
+        </td>
+        <td>
+          {{prod.descripcion}}  
+        </td>
+        <td>
+          {{prod.email}}
+        </td>
+        <td>
+          {{prod.fecha}} 
+        </td>
+      </tr>
+    </tbody>
+  </table>

@@ -1,0 +1,30 @@
+
+   <a routerLink="/animales-form" class="btn btn-primary">Nuevo Animal</a>
+    <br><br>
+   <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Categoria</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prod of  animales$|async">
+          <td>
+            {{prod.nombre}}
+          </td>
+          <td>
+            {{prod.categoria}}  
+          </td>
+          <td>
+            {{prod.email}} 
+          </td>
+          <td>
+            {{prod.fecha_nacimiento}} 
+          </td>
+        </tr>
+      </tbody>
+    
+    </table>

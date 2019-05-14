@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-6">
+        <form #f="ngForm" (ngSubmit)="save(f.value)">
+            <div class="container">
+              <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input ngModel name="nombre" id="nombre" type="text" class="form-control" d >
+              
+              </div>        
+              <label for="fecha_nacimiento">Fecha Naimiento</label>
+              
+                <input ngModel name="fecha_nacimiento" type="text"  ngbDatepicker #d="ngbDatepicker" class="form-control" id="fecha_nacimiento" >
+              
+              
+          
+              <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <select ngModel name="categoria" id="categoria" class="form-control" >
+                  <option value="Perro">Perro</option>
+                  <option value="Gato">Gato</option>
+                </select>
+                
+              </div>
+             
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input readonly [ngModel]="usuario.email" name="email" id="email" type="text" class="form-control"> 
+              </div>
+              <button class="btn btn-primary">Guardar Producto</button>
+              <button (click)="eliminar()" *ngIf="this.id"class="btn btn-dark">Eliminar Producto</button>
+            </div>
+        </form>
+    </div>

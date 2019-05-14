@@ -1,0 +1,39 @@
+<div class="row" >
+    <input  #consulta
+    (keyup)="filtro(consulta.value)"
+    type="text" class="form-control fixed" 
+    placeholder="Buscar..">
+  
+</div>
+<!--Categoria -->
+<br>
+
+<div class="row">
+  <div class="col-3">
+    <div class="list-group">
+      <a class="list-group-item list-group-item-action" routerLink="/">Todos los productos</a>
+      <a *ngFor="let item of categorias$ | async" 
+      routerLink="/"
+      class="list-group-item list-group-item-action"
+      [queryParams]="{parametrocategoria: item.$key }"
+      >
+        {{item.name}}
+      </a>
+    </div>
+  </div>
+
+<!--Producto-->
+<div class="col">
+  <div class="row">  
+      <ng-container *ngFor="let prod of arrayproductofiltrados; let i=index">
+      <div class="col">
+          <product-card [producto]="prod" [shopping-cart]="cart"></product-card>  
+      </div>
+      <div *ngIf="(i+1)%2===0" class="w-100"></div>
+      </ng-container>
+  </div>
+</div>
+</div>
+
+
+

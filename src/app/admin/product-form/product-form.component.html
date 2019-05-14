@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-6">
+      <form #f="ngForm" (ngSubmit)="save(f.value)">
+          <div class="container">
+            <div class="form-group">
+              <label for="Nombre">Nombre</label>
+              <input #nombre="ngModel" [(ngModel)]="producto.nombre" name="nombre" id="nombre" type="text" class="form-control" required >
+              <div class="alert alert-danger" *ngIf="nombre.touched && nombre.invalid">
+                Se necesita poner un titulo.
+              </div>
+            </div>        
+            <label for="precio">Precio</label>
+            <div class="input-group mb-3">   
+              <input #precio="ngModel" [(ngModel)]="producto.precio" name="precio" type="number" class="form-control" id="precio" required min="0">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">€</span>
+              </div>
+            </div>
+            <div class="alert alert-danger" *ngIf="precio.touched && precio.invalid">
+              <div *ngIf="precio.errors.required">necesita poner un Precio.</div> 
+              <div *ngIf="precio.errors.min">Precio debera ser mayor que 0</div> 
+            </div>
+        
+            <div class="form-group">
+              <label for="categoria">Categoria</label>
+              <select #categoria="ngModel" [(ngModel)]="producto.categoria" name="categoria" id="categoria" class="form-control" required >
+                <option value=""></option>
+                <option *ngFor="let c of categoria$ | async" [value]="c.$key">
+                  {{c.name}}
+                </option>
+              </select>
+              <div class="alert alert-danger" *ngIf="categoria.touched && categoria.invalid">
+                  Se necesita poner un Categoria.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="Imagen">Imagen</label>
+              <input #imagen="ngModel" [(ngModel)]="producto.imagen" name="imagen" id="imagen" type="text" class="form-control" required url>
+              <div class="alert alert-danger" *ngIf="imagen.touched && imagen.invalid">
+                <div *ngIf="imagen.errors.required" >Se necesita imagen</div>
+                <div *ngIf="imagen.errors.url" >Introduzca un valor valido </div>
+              </div>
+            </div>
+            <button class="btn btn-primary">Guardar Producto</button>
+            <button (click)="eliminar()" *ngIf="this.id"class="btn btn-dark">Eliminar Producto</button>
+          </div>
+      </form>
+  </div>
+  <!--Card-->
+  <div class="col-6" *ngIf="producto.nombre">
+    <div class="card" style="width: 20rem">
+      <img class="card-img-top" [src]="producto.imagen" *ngIf="producto.imagen"alt="">
+      <div class="card-body">
+        <h4 class="card-title">{{producto.nombre}}</h4>
+        <p class="card-text">{{producto.precio | currency:'EUR':true }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ 
