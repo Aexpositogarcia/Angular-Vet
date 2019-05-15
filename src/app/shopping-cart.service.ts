@@ -19,11 +19,12 @@ export class ShoppingCartService {
     });
   
   }
+  //Lo convierte a un Observable Carrito
    async ObtenerCarrito():Promise<Observable<Carrito>>{
 
     let cartId=await this.ObtenerOcrearCarrito();
     return this.db.object('/carrito/'+cartId).map(x=>new Carrito(x.items));
-
+    
   }
   
   ObtenerItem(cartId:string,productoid:String){

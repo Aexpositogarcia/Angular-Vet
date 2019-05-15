@@ -1,4 +1,5 @@
 import{Carritoitem } from './Carrito-item';
+import { Producto } from './producto';
 
 export class Carrito{
 
@@ -14,6 +15,15 @@ export class Carrito{
         }
             
     }
+
+    obtenercantidad(product: Producto){
+
+        let item=this.itemsmap[product.$key];
+    
+        return item ? item.cantidad:0;
+        
+    
+      }
 
     get Preciototalglobal(){
 
@@ -31,5 +41,6 @@ export class Carrito{
         for (let productoid in this.items)
             contador += this.items[productoid].cantidad;
         return contador;
+
     }       
 }

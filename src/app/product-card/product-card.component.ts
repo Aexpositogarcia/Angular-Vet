@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Producto } from '../models/producto';
 import { ShoppingCartService } from '../shopping-cart.service';
+import { Carrito } from '../models/Carrito';
 
 @Component({
   selector: 'product-card',
@@ -9,26 +10,14 @@ import { ShoppingCartService } from '../shopping-cart.service';
 })
 export class ProductCardComponent  {
   @Input('producto') product: Producto;
-  @Input('shopping-cart') shoppingCart;
+  @Input('shopping-cart') shoppingCart: Carrito;
   constructor(private shoppingcartservice:ShoppingCartService) { }
 
-  obtenercantidad(){
+  
 
-    if(!this.shoppingCart) console.log('No tiene cantidad');
-        
-    if(!this.shoppingCart) return 0;
-
-    let item=this.shoppingCart.items[this.product.$key];
-
-    return item ? item.cantidad:0;
-    
-    
-
-  }
   anadiralcarrito(){
-
     this.shoppingcartservice.AñadirCompra(this.product);
-
+    console.log(this.shoppingCart.obtenercantidad(this.product));
   }
 
   eliminaralcarrito(){

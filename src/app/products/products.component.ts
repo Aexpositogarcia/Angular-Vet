@@ -4,6 +4,7 @@ import { CategoryService } from '../category.service';
 
 import { ActivatedRoute } from '@angular/router';
 import { Producto } from '../models/producto';
+import {Carrito} from '../models/Carrito';
 import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
 import { ShoppingCartService } from '../shopping-cart.service';
 import { Subscription } from 'rxjs';
