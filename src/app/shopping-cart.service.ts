@@ -34,10 +34,13 @@ export class ShoppingCartService {
   private async ObtenerOcrearCarrito(): Promise<string>{
 
     let cartId=localStorage.getItem('cartId');
+    //Si existe el carrito devuelve  el id del carrito
     if(cartId) return cartId;
-
+    //creamos variable resut para crear un nuevo carrito con el metodo "creaCarrito"
     let result =await this.CrearCarrito();
+    //generamos un nuevo "carrito"
     localStorage.setItem('cartId',result.key);
+
     return result.key;
     
   }
@@ -46,19 +49,24 @@ export class ShoppingCartService {
   }
 
   async EliminarCompra(producto: Producto){
+
     this.actualizar(producto,-1);
+
   }
   
   async actualizar(producto: Producto, operador){
+
+
     let cartId= await this.ObtenerOcrearCarrito();
    
     let objetocarrito$=this.ObtenerItem(cartId,producto.$key);
 
       objetocarrito$.take(1).subscribe(objetocarrito=>{
-
+      //se subcribe al carrito y añade/suma/elimina uno objeto al carrito
       objetocarrito$.update({producto: producto, cantidad: (objetocarrito.cantidad ||0)+operador});
 
       });
+
   }
 
 }

@@ -22,10 +22,13 @@ export class ProductCardComponent  {
 
     return item ? item.cantidad:0;
     
+    
 
   }
   anadiralcarrito(){
+
     this.shoppingcartservice.AñadirCompra(this.product);
+
   }
 
   eliminaralcarrito(){

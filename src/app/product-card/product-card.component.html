@@ -6,7 +6,7 @@
       <p class="card-text">{{product.precio| currency: 'EUR':true}}</p>
     </div>
     <div class="card-footer">
-        <button  (click)="anadiralcarrito(product)" *ngIf="obtenercantidad() ===0" class="btn btn-primary btn-block" >Añadir </button>
+        <button  (click)="anadiralcarrito(product)" *ngIf="obtenercantidad() === 0" class="btn btn-primary btn-block" >Añadir </button>
         <button  (click)="anadiralcarrito(product)" *ngIf="obtenercantidad() !=0" class="btn btn-dark btn-block" >Añadir : {{ obtenercantidad()}}</button>
         <button  (click)="eliminaralcarrito(product)" *ngIf="obtenercantidad() !=0" class="btn btn-danger btn-block" >Eliminar</button>
     </div>
