@@ -5,7 +5,8 @@
       <h4 class="card-title">{{product.nombre}}</h4>
       <p class="card-text">{{product.precio| currency: 'EUR':true}}</p>
     </div>
-    <div class="card-footer">
+    <!--ngIf controla que exista el carrito-->
+    <div class="card-footer" *ngIf="shoppingCart">
         <button  (click)="anadiralcarrito(product)" *ngIf="shoppingCart.obtenercantidad(product) === 0" class="btn btn-primary btn-block" >Añadir </button>
         <button  (click)="anadiralcarrito(product)" *ngIf="shoppingCart.obtenercantidad(product) !=0" class="btn btn-dark btn-block" >Añadir : {{shoppingCart.obtenercantidad(product)}}</button>
         <button  (click)="eliminaralcarrito(product)" *ngIf="shoppingCart.obtenercantidad(product) !=0" class="btn btn-danger btn-block" >Eliminar</button>
