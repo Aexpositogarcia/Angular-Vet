@@ -19,6 +19,7 @@ import {RouterModule} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './auth.service';
 import {CategoryService}from './category.service';
+
 import { AuthGuardService } from './auth-guard.service';
 import {VeterinarioAuthGuardService} from './veterinario-auth-guard.service';
 import { UserService } from './user.service';
@@ -33,8 +34,12 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { AnimalesFormComponent } from './animales-form/animales-form.component';
 import { AnimalesComponent } from './animales/animales.component';
 import { VercitasVeterinarioComponent } from './vercitas-veterinario/vercitas-veterinario.component';
+
 import { PedircitaComponent } from './pedircita/pedircita.component';
-import {CitasService} from './citas.service'
+import {CitasService} from './citas.service';
+
+
+
 
 @NgModule({
   declarations: [
@@ -54,13 +59,14 @@ import {CitasService} from './citas.service'
     AnimalesFormComponent,
     AnimalesComponent,
     VercitasVeterinarioComponent,
-    PedircitaComponent,
+    PedircitaComponent,   
    
   ],
   imports: [
 
     BrowserModule,
     FormsModule,
+    
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     NgbModule.forRoot(),
@@ -75,6 +81,8 @@ import {CitasService} from './citas.service'
       {path:'shopping-cart' ,component:ShoppingCartComponent},
       {path:'check-out' ,component:CheckOutComponent, canActivate:[AuthGuardService]},
       {path:'order-success' ,component:OrderSuccessComponent, canActivate:[AuthGuardService]},
+      
+      
       {path:'login' ,component:LoginComponent},
       {path:'animales-form' ,component:AnimalesFormComponent},
       {path:'animales', component:AnimalesComponent},
@@ -84,9 +92,11 @@ import {CitasService} from './citas.service'
       {path:'admin/orders' ,component:AdminOrdersComponent,  canActivate:[AuthGuardService,AdminAuthGuardService]},
       {path:'admin/products/new',component:ProductFormComponent, canActivate:[AuthGuardService,AdminAuthGuardService]},
       {path:'admin/products/:id',component:ProductFormComponent, canActivate:[AuthGuardService,AdminAuthGuardService]}
+
     ])
     
   ],
+
   providers: [
     AuthService,
     AuthGuardService,
@@ -99,6 +109,8 @@ import {CitasService} from './citas.service'
     AnimalesService,
     ProductService
   ],
+  
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

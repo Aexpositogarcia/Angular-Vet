@@ -8,7 +8,11 @@
     <ul class="navbar-nav mr-auto">
      
       <li class="nav-item">
-        <a class="nav-link" routerLink="/shopping-cart">Mi carrito </a>
+        <a class="nav-link" routerLink="/shopping-cart">Mi carrito
+     
+        <span class="badge badge-warning badge-pill">{{numerodeitems}}</span>
+
+        </a>
       </li>
       <!--Muestra el li si el usuario no esta registrado-->
       <ng-template #anonymusUser>
@@ -24,7 +28,8 @@
         <div  ngbDropdownMenu class="dropdown-menu show " aria-labelledby="dropdown01">
           <a class="dropdown-item" routerLink="/my/orders">Mis pedidos</a>
           <a class="dropdown-item" routerLink="/animales">Mis animales</a>
-          <a class="dropdown-item" routerLink="/pedircita">Pedir cita</a>
+          <a class="dropdown-item" routerLink="/calendar">Pedir cita</a>
+          
           
           <ng-container *ngIf="usuario.isAdmin">
             <a class="dropdown-item" routerLink="/admin/orders">Administrar Pedidos</a>
@@ -37,7 +42,7 @@
           <a class="dropdown-item"(click)="logout()">Salir</a>
         </div>
       </li>
-     
+    
     </ul>
     
   </div>

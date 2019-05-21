@@ -5,12 +5,16 @@ export class Carrito{
 
     items: Carritoitem[]=[];
 
-    constructor(public itemsmap: {proudctId: Carritoitem[]}){
-    
+    constructor(public itemsmap: {[proudctId: string]:Carritoitem}){
+        this.itemsmap=itemsmap||{};
         for(let productId in itemsmap){
             
             let item=itemsmap[productId];
-            this.items.push(new Carritoitem(item.producto, item.cantidad));
+            let x= new Carritoitem;
+            //asignamos el bojeto Carritoitem a la x;
+            Object.assign(x,item);
+            x.$key=productId;
+            this.items.push(x);
 
         }
             
@@ -23,7 +27,7 @@ export class Carrito{
         return item ? item.cantidad:0;
         
     
-      }
+    }
 
     get Preciototalglobal(){
 

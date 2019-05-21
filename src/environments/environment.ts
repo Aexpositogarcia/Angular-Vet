@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
+  
   firebase:{
     apiKey: "AIzaSyA0pfSfEAwdit-J3JdFUFTRfPbFZfddJoQ",
     authDomain: "pshop-855e1.firebaseapp.com",
@@ -13,4 +14,5 @@ export const environment = {
     storageBucket: "",
     messagingSenderId: "135114245785"
   }
+  
 };

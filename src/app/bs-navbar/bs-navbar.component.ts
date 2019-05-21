@@ -16,6 +16,7 @@ export class BsNavbarComponent  implements OnInit{
   //Utilizado
   usuario: AppUsuarios;
   carrito$: Observable<Carrito>;
+  numerodeitems: number;
 
   constructor(private auth: AuthService, private servicioCarrito:ShoppingCartService) {  }
   
@@ -25,10 +26,13 @@ export class BsNavbarComponent  implements OnInit{
   
   }
   async ngOnInit(){
-     //afAuth.authState.subscribe(user=>this.user=user);
-     this.auth.appUser$.subscribe(appUser=>this.usuario=appUser);
-      
-     this.carrito$=await this.servicioCarrito.ObtenerCarrito();
+    
+    //afAuth.authState.subscribe(user=>this.user=user);
+    this.auth.appUser$.subscribe(appUser=>this.usuario=appUser);
+
+    this.carrito$= await this.servicioCarrito.ObtenerCarrito();
+    //me suscribo a el carrito para ver el totoal de producots que tengo
+    this.carrito$.subscribe(carrito=>{this.numerodeitems=carrito.totaldeProductos});
      
   }
 

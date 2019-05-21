@@ -54,6 +54,11 @@ export class ShoppingCartService {
     this.actualizar(producto,-1);
 
   }
+  async LimpiarCarro(){
+    let cartId= await this.ObtenerOcrearCarrito();
+
+    this.db.object('/carrito/'+cartId+'/items').remove();
+  }
   
   async actualizar(producto: Producto, operador){
 
@@ -64,10 +69,23 @@ export class ShoppingCartService {
 
       objetocarrito$.take(1).subscribe(objetocarrito=>{
       //se subcribe al carrito y añade/suma/elimina uno objeto al carrito
-      objetocarrito$.update({producto: producto, cantidad: (objetocarrito.cantidad ||0)+operador});
 
+      let cantidad=(objetocarrito.cantidad ||0)+operador;
+      if(cantidad===0) objetocarrito$.remove();
+      else objetocarrito$.update({
+
+          titulo: producto.nombre, 
+          imagenUrl:producto.imagen,
+          precio:producto.precio,
+          cantidad: cantidad
+  
+        });
+  
       });
+    }
+} 
+      
+    
 
-  }
+  
 
-}

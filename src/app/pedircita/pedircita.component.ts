@@ -5,15 +5,19 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { AppUsuarios } from '../models/app-usuarios';
 
+
 @Component({
   selector: 'app-pedircita',
   templateUrl: './pedircita.component.html',
   styleUrls: ['./pedircita.component.css']
 })
+
 export class PedircitaComponent  {
   nombres$;
-  id;
-  usuario:AppUsuarios;
+  id; 
+  usuario;
+
+ 
   constructor(private ruter: Router ,private auth:AuthService ,private citaservice:CitasService,private animaleservicio:AnimalesService) { 
     this.nombres$=auth.appUser$.switchMap(u=>animaleservicio.obteneranimalesacutal(u.email));
 
@@ -21,7 +25,10 @@ export class PedircitaComponent  {
   }
   
 
+  
+  
   save(cita){
+
     if(this.id){
       this.citaservice.actualizar(this.id,cita);
       this.ruter.navigate(['/']);
@@ -38,7 +45,5 @@ export class PedircitaComponent  {
        this.ruter.navigate(['/']);
     }
 
- 
-
-}
+  }
 }

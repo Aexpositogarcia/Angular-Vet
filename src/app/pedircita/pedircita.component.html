@@ -1,17 +1,18 @@
 <div class="row">
     <div class="col-6">
         <form #f="ngForm" (ngSubmit)="save(f.value)">
-            <div class="container">
 
+            <div class="container">
+                
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <select ngModel name="nombre"  id="nombre" class="form-control"  >
                         <option value=""></option>
-                        <option *ngFor="let c of nombres$|async"[value]="c.nombre">
-                          {{c.nombre}}
+                          <option *ngFor="let c of nombres$|async"[value]="c.nombre">
+                            {{c.nombre}}
                         </option>
-                        </select>
-                  </div>
+                    </select>
+                </div>
 
               <div class="form-group">
                 <label for="descripcion">Descripcion</label>
@@ -20,13 +21,21 @@
                   
               <label for="fecha">Fecha</label>
               
+              <!-- DATE PICKER-->
+
+              
+
+              <!-- DATE PICKER -->
+              <br>
+
               <input ngModel name="fecha" type="text" class="form-control" id="fecha" >
 
               <div class="form-group">
                 <label for="email">Email</label>
                 <input readonly [ngModel]="usuario.email" name="email" id="email" type="text" class="form-control"> 
               </div>
-              <button class="btn btn-primary">Guardar Producto</button>
+
+              <button class="btn btn-primary">Pedir Cita</button>
               <button (click)="eliminar()" *ngIf="this.id"class="btn btn-dark">Eliminar Producto</button>
             </div>
         </form>
