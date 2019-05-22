@@ -35,7 +35,8 @@ export class ProductsComponent implements OnInit,OnDestroy {
     ,  private shoppingcartservice:ShoppingCartService) { 
 
     productService.obtenertodos().subscribe(productos=> {
-    this.productos  = productos;
+
+      this.productos  = productos;
 
       route.queryParamMap.subscribe(parametro=>{
         this.categoriactual =parametro.get('parametrocategoria');
@@ -52,8 +53,6 @@ export class ProductsComponent implements OnInit,OnDestroy {
 
     });
     this.categorias$=categorieService.getCategorias();
-    
-
 
     
   }

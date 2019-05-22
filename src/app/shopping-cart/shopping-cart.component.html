@@ -14,7 +14,9 @@
       </tr>
     </thead>
     <tbody>
-      
+      <tr *ngIf="cart.items.length===0">
+        <td style="align-content: center"><em>El carrito esta vacio</em></td>
+      </tr>
       <tr *ngFor="let item of cart.items">
         <td> 
           <img [src]=" item.imagenUrl " class="thumbnail" alt="">
@@ -26,7 +28,7 @@
             {{item.cantidad}}
         </td>
         <td>
-            <b>{{item.Preciototal}} €</b>
+          <b>{{item.Preciototal}} €</b>
         </td>
 
       </tr>
@@ -37,11 +39,13 @@
       <td></td>
       <td></td>
       <td></td>
-      <td> <b>Total: {{cart.Preciototalglobal}} €</b> </td>
+      <td *ngIf="cart.items.length!=0"> <b>Total: {{cart.Preciototalglobal}} €</b> </td>
       
     </tfoot>
   </table>
 
-  <button (click)="LimpiarCarrito()" class="btn btn-danger btn-sm">Limpiar Carrito</button>
+  <button ngif="cart.items.length" (click)="LimpiarCarrito()" class="btn btn-danger btn-sm">Limpiar Carrito</button>
+
+  <button ngif="cart.items.length"  routerLink="/check-out" class="btn btn-primary btn-sm">Pedir pedido</button>
 
 </ng-container>

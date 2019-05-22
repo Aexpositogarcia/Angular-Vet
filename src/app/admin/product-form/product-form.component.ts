@@ -28,6 +28,7 @@ export class ProductFormComponent implements OnInit {
     
     console.log(this.producto);
   }
+  
   save(producto){
     if(this.id){
       this.productservice.actualizar(this.id,producto);

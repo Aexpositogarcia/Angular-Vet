@@ -37,6 +37,9 @@ import { VercitasVeterinarioComponent } from './vercitas-veterinario/vercitas-ve
 
 import { PedircitaComponent } from './pedircita/pedircita.component';
 import {CitasService} from './citas.service';
+import { PedidoService } from './pedido.service';
+import { ResumenCarritoComponent } from './resumen-carrito/resumen-carrito.component';
+import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 
 
 
@@ -59,7 +62,9 @@ import {CitasService} from './citas.service';
     AnimalesFormComponent,
     AnimalesComponent,
     VercitasVeterinarioComponent,
-    PedircitaComponent,   
+    PedircitaComponent,
+    ResumenCarritoComponent,
+    DetallePedidoComponent,   
    
   ],
   imports: [
@@ -80,7 +85,7 @@ import {CitasService} from './citas.service';
       {path:'pedircita' ,component:PedircitaComponent},
       {path:'shopping-cart' ,component:ShoppingCartComponent},
       {path:'check-out' ,component:CheckOutComponent, canActivate:[AuthGuardService]},
-      {path:'order-success' ,component:OrderSuccessComponent, canActivate:[AuthGuardService]},
+      {path:'pedido-exitoso/:id' ,component:OrderSuccessComponent, canActivate:[AuthGuardService]},
       
       
       {path:'login' ,component:LoginComponent},
@@ -107,7 +112,8 @@ import {CitasService} from './citas.service';
     ShoppingCartService,
     CitasService,
     AnimalesService,
-    ProductService
+    ProductService,
+    PedidoService
   ],
   
   bootstrap: [AppComponent]

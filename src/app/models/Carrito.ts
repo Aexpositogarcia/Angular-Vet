@@ -1,3 +1,4 @@
+
 import{Carritoitem } from './Carrito-item';
 import { Producto } from './producto';
 
@@ -5,28 +6,28 @@ export class Carrito{
 
     items: Carritoitem[]=[];
 
-    constructor(public itemsmap: {[proudctId: string]:Carritoitem}){
-        this.itemsmap=itemsmap||{};
-        for(let productId in itemsmap){
-            
-            let item=itemsmap[productId];
-            let x= new Carritoitem;
-            //asignamos el bojeto Carritoitem a la x;
-            Object.assign(x,item);
-            x.$key=productId;
-            this.items.push(x);
+    constructor(private itemsMap: { [productId: string]: Carritoitem }) {
+        //o vacio para que se incialice 
+        this.itemsMap = itemsMap || {};
+        
+        for (let productId in itemsMap) {
+        
+          let item = itemsMap[productId];
 
+          //... operador para inicializar el array
+          //se le añade al array item todo su contenido + la key
+
+          this.items.push(new Carritoitem({ ...item, $key: productId }));
+          
         }
+      }
             
-    }
-
     obtenercantidad(product: Producto){
 
-        let item=this.itemsmap[product.$key];
+        let item=this.itemsMap[product.$key];
     
         return item ? item.cantidad:0;
         
-    
     }
 
     get Preciototalglobal(){
