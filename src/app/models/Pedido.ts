@@ -4,10 +4,15 @@ export class Pedido{
     
     FechaPedido:number;
     productos:any[]
+    Preciototalgloblal:number;
+
 
     constructor(public userId:string ,public direccion: any, carrito:Carrito ){
+      
     this.FechaPedido=new Date().getTime();
       console.log('Carrito llega: '+carrito.items);
+    this.Preciototalgloblal=carrito.Preciototalglobal;
+      
     this.productos=carrito.items.map(i=>{
           //Campos deben de ser llamados igual que en la base de datos para que funcione y los reconozca (ej i.imagen)
           return {

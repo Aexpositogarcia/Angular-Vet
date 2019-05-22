@@ -14,6 +14,9 @@ export class PedidoService {
   obtenerpedidos() { 
     return this.db.list('/pedidos');
   }
+  obtenerPedidoId(id){
+    return this.db.object('/pedidos/'+ id);
+  }
 
   obtenerPedidosUsuario(userId: string) {
     return this.db.list('/pedidos', {

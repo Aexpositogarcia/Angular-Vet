@@ -86,7 +86,8 @@ import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.componen
       {path:'shopping-cart' ,component:ShoppingCartComponent},
       {path:'check-out' ,component:CheckOutComponent, canActivate:[AuthGuardService]},
       {path:'pedido-exitoso/:id' ,component:OrderSuccessComponent, canActivate:[AuthGuardService]},
-      
+
+      {path:'detalle-pedido/:id' ,component:DetallePedidoComponent},
       
       {path:'login' ,component:LoginComponent},
       {path:'animales-form' ,component:AnimalesFormComponent},

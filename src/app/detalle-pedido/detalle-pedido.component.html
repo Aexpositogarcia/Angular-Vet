@@ -1,3 +1,78 @@
-<p>
-  detalle-pedido works!
-</p>
+<h2>Pedido cod ({{id}}) </h2>
+<br>
+<div class="row">
+  <div class="col-6"><div class="card" *ngIf="pedido">
+      <div class="card-body">
+        <h4 class="card-title">{{pedido.direccion.nombre}}</h4>
+        <br>
+        <p class="card-text">Direccion del pedido</p>
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item  list-group-flush">
+           <b> Direccion 1: </b> {{pedido.direccion.direccion1}}
+          </li>
+          <li class="list-group-item  list-group-flush">
+           <b> Direccion 2: </b>{{pedido.direccion.direccion2}}
+          </li>
+          <li class="list-group-item  list-group-flush">
+              <b> Ciudad: </b>{{pedido.direccion.ciudad}}
+             </li>
+          <li class="list-group-item font-weight-bold">
+            
+            <div class="float-right">
+                {{pedido.FechaPedido | date}}
+            </div>
+          </li>
+        </ul>
+    </div>
+  </div>
+</div>
+
+  <div class="col-6">
+    <div class="card" *ngIf="pedido">
+      <div class="card-body">
+        <h4 class="card-title">Detalle productos</h4>
+       
+        <p class="card-text">Productos del carrito.</p>
+        
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th></th>
+                  </tr>
+                </thead>
+            <tbody>
+
+        <tr *ngFor="let item of pedido.productos">
+            
+              <td>
+                <img [src]="item.producto.imagenUrl" class="thumbnail" alt="">
+              </td>
+              <td>
+                  {{ item.producto.titulo }}
+              </td>
+              <td>
+                  {{ item.cantidad }}
+              </td>
+              <td>
+                  {{item.PrecioTotal | currency: 'EUR' }}
+              </td>
+            
+        </tr>
+        </tbody>
+        </table>
+          <li class="list-group-item font-weight-bold">
+            Total 
+            <div class="float-right">
+              {{pedido.Preciototalgloblal | currency:'EUR':true }}
+            </div>
+          </li>
+        
+    </div>
+  </div>
+</div>
+</div>
+
