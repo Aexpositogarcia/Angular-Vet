@@ -44,8 +44,8 @@
     </tfoot>
   </table>
 
-  <button ngif="cart.items.length" (click)="LimpiarCarrito()" class="btn btn-danger btn-sm">Limpiar Carrito</button>
+  <button *ngIf="cart.items.length" (click)="LimpiarCarrito()" class="btn btn-danger btn-sm">Limpiar Carrito</button>
 
-  <button ngif="cart.items.length"  routerLink="/check-out" class="btn btn-primary btn-sm">Pedir pedido</button>
+  <button *ngIf="cart.items.length"  routerLink="/check-out" class="btn btn-primary btn-sm">Pedir pedido</button>
 
 </ng-container>

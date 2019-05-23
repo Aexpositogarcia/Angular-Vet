@@ -26,6 +26,7 @@ import { UserService } from './user.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import {FormsModule} from '@angular/forms';
+
 import {ProductService} from'./product.service';
 import {AnimalesService} from './animales.service';
 import {CustomFormsModule} from 'ng2-validation';
@@ -40,6 +41,8 @@ import {CitasService} from './citas.service';
 import { PedidoService } from './pedido.service';
 import { ResumenCarritoComponent } from './resumen-carrito/resumen-carrito.component';
 import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
+
+import {UploadFileService} from './upload-file.service';
 
 
 
@@ -57,6 +60,7 @@ import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.componen
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
+    
     ProductFormComponent,
     ProductCardComponent,
     AnimalesFormComponent,
@@ -90,7 +94,7 @@ import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.componen
       {path:'detalle-pedido/:id' ,component:DetallePedidoComponent},
       
       {path:'login' ,component:LoginComponent},
-      {path:'animales-form' ,component:AnimalesFormComponent},
+      {path:'animales-form/:id' ,component:AnimalesFormComponent},
       {path:'animales', component:AnimalesComponent},
       {path:'my/orders',component:MyOrdersComponent , canActivate:[AuthGuardService]},
       {path:'admin/products' ,component:AdminProductsComponent,  canActivate:[AuthGuardService,AdminAuthGuardService]},
@@ -113,6 +117,7 @@ import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.componen
     ShoppingCartService,
     CitasService,
     AnimalesService,
+    UploadFileService,
     ProductService,
     PedidoService
   ],

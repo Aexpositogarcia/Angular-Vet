@@ -11,7 +11,7 @@ export const environment = {
     authDomain: "pshop-855e1.firebaseapp.com",
     databaseURL: "https://pshop-855e1.firebaseio.com",
     projectId: "pshop-855e1",
-    storageBucket: "",
+    storageBucket: "gs://pshop-855e1.appspot.com/",
     messagingSenderId: "135114245785"
   }
   

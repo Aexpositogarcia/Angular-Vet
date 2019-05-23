@@ -6,13 +6,12 @@
                 <label for="nombre">Nombre</label>
                 <input ngModel name="nombre" id="nombre" type="text" class="form-control" d >
               
-              </div>        
-              <label for="fecha_nacimiento">Fecha Naimiento</label>
+              </div>
+              <div class="form-group">   
+                <label for="fecha_nacimiento">Fecha Naimiento</label>
               
                 <input ngModel name="fecha_nacimiento" type="text"  ngbDatepicker #d="ngbDatepicker" class="form-control" id="fecha_nacimiento" >
-              
-              
-          
+              </div>   
               <div class="form-group">
                 <label for="categoria">Categoria</label>
                 <select ngModel name="categoria" id="categoria" class="form-control" >
@@ -21,13 +20,49 @@
                 </select>
                 
               </div>
+              
+              <div class="form-group">
+                <div *ngIf="currentFileUpload" class="progress" style="width:400px">
+                  <div class="progress-bar progress-bar-info progress-bar-striped"
+                    role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                    aria-valuemin="0" aria-valuemax="100"
+                    [ngStyle]="{width:progress.percentage+'%'}">
+                    {{progress.percentage}}%</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="categoria">Género</label>
+                <select ngModel name="categoria" id="categoria" class="form-control" >
+                  <option value="Perro">Hembra</option>
+                  <option value="Gato">Macho</option>
+                </select>
+                
+              </div>
              
               <div class="form-group">
-                <label for="email">Email</label>
-                <input readonly [ngModel]="usuario.email" name="email" id="email" type="text" class="form-control"> 
+                <label for="propietario">Propietario</label>
+                <input readonly [ngModel]="usuario.name" name="propietario" id="propietario" type="text" class="form-control"> 
               </div>
-              <button class="btn btn-primary">Guardar Producto</button>
+
+              
+              
+              <label class="btn btn-default"> <input type="file"
+                (change)="selectFile($event)">
+              </label>
+               
+              <button class="btn btn-success" [disabled]="!selectedFiles"
+              
+                (click)="upload()">Upload</button>
+
+             
+
+              <button class="btn btn-primary">Guardar Animal</button>
+
               <button (click)="eliminar()" *ngIf="this.id"class="btn btn-dark">Eliminar Producto</button>
+
+        
             </div>
+
         </form>
     </div>

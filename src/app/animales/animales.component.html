@@ -4,25 +4,28 @@
    <table class="table table-striped">
       <thead class="thead-dark">
         <tr>
-          <th>Nombre</th>
-          <th>Precio</th>
+          <th>Nombre Animal</th>
           <th>Categoria</th>
-          <th></th>
+          <th>Propietario</th>
+          <th>Fecha de Nacimiento</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let prod of  animales$|async">
+        <tr *ngFor="let animales of  animales$|async">
           <td>
-            {{prod.nombre}}
+            {{animales.nombre}}
           </td>
           <td>
-            {{prod.categoria}}  
+            {{animales.categoria}}  
           </td>
           <td>
-            {{prod.email}} 
+            {{animales.propietario}} 
           </td>
           <td>
-            {{prod.fecha_nacimiento}} 
+            {{animales.fecha_nacimiento}} 
+          </td>
+          <td>
+            <a [routerLink]="['/animales-form/', animales.$key]">Editar Animal</a> 
           </td>
         </tr>
       </tbody>
