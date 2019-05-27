@@ -25,8 +25,6 @@ export class PedircitaComponent  {
   }
   
 
-  
-  
   save(cita){
 
     if(this.id){

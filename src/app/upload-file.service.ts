@@ -12,7 +12,7 @@ export class UploadFileService {
  
   private basePath = '/animales';
  
-  pushFileToStorage(fileUpload: FileUpload, progress: {percentage: number}) {
+  pushFileToStorage(fileUpload: FileUpload, progress: {percentage: number},id) {
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.basePath}/${fileUpload.file.name}`).put(fileUpload.file);
  
@@ -30,13 +30,22 @@ export class UploadFileService {
         // success
         fileUpload.url = uploadTask.snapshot.downloadURL
         fileUpload.name = fileUpload.file.name
-        this.saveFileData(fileUpload)
+        if(id){
+          this.actualizarFileDATA(fileUpload,id);
+          
+        }else{
+          this.saveFileData(fileUpload)
+        }
       }
     );
   }
  
   private saveFileData(fileUpload: FileUpload) {
     this.db.list(`${this.basePath}/`).push(fileUpload);
+  }
+
+  private actualizarFileDATA(fileUpload: FileUpload,id) {
+    this.db.object(`${this.basePath}/`+id).update(fileUpload);
   }
 
 }

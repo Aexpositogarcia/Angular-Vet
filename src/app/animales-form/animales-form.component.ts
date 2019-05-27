@@ -24,7 +24,7 @@ animalfinal;
 
 usuario:AppUsuarios;
 email;
-animalo:Animal;
+animal={};
 constructor(
 
   private auth:AuthService,
@@ -40,7 +40,7 @@ constructor(
   //Obtener el id pasado por parametro
   this.id=this.route.snapshot.paramMap.get('id');
   //take para indicar que el observable se completara cuando se le pase solo un objeto
- // if(this.id) this.animaleservice.obteneranimal(this.id).take(1).subscribe(p => this.animal = p);
+   if(this.id) this.animaleservice.obteneranimal(this.id).take(1).subscribe(p => this.animal = p);
   
   //console.log(this.animal);
 }
@@ -50,14 +50,18 @@ save(animal){
   
 
   if(this.id){
+
+    
+    
+    Object.assign(this.currentFileUpload,animal,this.usuario);
+
     this.animaleservice.actualizar(this.id,animal);
+
     this.ruter.navigate(['/animales']);
-  }else{
-     
 
-    const file = this.selectedFiles.item(0)
+    this.uploadService.pushFileToStorage(this.currentFileUpload, this.progress,this.id)
 
-    this.currentFileUpload = new FileUpload(file);
+  }else{ 
   
     Object.assign(this.currentFileUpload,animal,this.usuario);
 
@@ -65,12 +69,15 @@ save(animal){
 
     this.ruter.navigate(['/animales']);
     
-    this.uploadService.pushFileToStorage(this.currentFileUpload, this.progress)
+    
+    this.uploadService.pushFileToStorage(this.currentFileUpload, this.progress,this.id)
   }
 }
 
 selectFile(event) {
   this.selectedFiles = event.target.files;
+  const file = this.selectedFiles.item(0);
+  this.currentFileUpload = new FileUpload(file);
 }
 
 
@@ -79,7 +86,7 @@ eliminar(){
   if(confirm("¿Quieres eliminar este producto?")){
 
      this.animaleservice.eliminar(this.id);
-     this.ruter.navigate(['/admin/products']);
+     this.ruter.navigate(['/animales']);
 
   }
 }

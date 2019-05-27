@@ -4,23 +4,53 @@
             <div class="container">
               <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input ngModel name="nombre" id="nombre" type="text" class="form-control" d >
+
+                <input #nombre="ngModel" [(ngModel)]="animal.nombre" name="nombre" id="nombre" type="text" class="form-control" required >
+                
+                <div class="alert alert-danger" *ngIf="nombre.touched && nombre.invalid">
+                  Se necesita poner un titulo.
+                </div>
               
               </div>
-              <div class="form-group">   
-                <label for="fecha_nacimiento">Fecha Naimiento</label>
+              <div class="form-group">
+
+                <label for="fecha_nacimiento">Fecha Nacimiento</label>
               
-                <input ngModel name="fecha_nacimiento" type="text"  ngbDatepicker #d="ngbDatepicker" class="form-control" id="fecha_nacimiento" >
+                <input #fecha_nacimiento="ngModel" [(ngModel)]="animal.fecha_nacimiento" name="fecha_nacimiento" type="text" class="form-control" id="fecha_nacimiento" required>
+                
+                <div class="alert alert-danger" *ngIf="fecha_nacimiento.touched && fecha_nacimiento.invalid">
+                    Se necesita poner una fecha de nacimiento.
+                </div>
+              
               </div>   
               <div class="form-group">
                 <label for="categoria">Categoria</label>
-                <select ngModel name="categoria" id="categoria" class="form-control" >
+                <select #categoria="ngModel"  [(ngModel)]="animal.categoria" name="categoria" id="categoria" class="form-control" required>
                   <option value="Perro">Perro</option>
                   <option value="Gato">Gato</option>
                 </select>
+                <div class="alert alert-danger" *ngIf="categoria.touched && categoria.invalid">
+                    Se necesita poner una fecha de nacimiento.
+                </div>
                 
               </div>
               
+              
+              <div class="form-group">
+                <label for="genero">Género</label>
+                <select #genero="ngModel" [(ngModel)]="animal.genero" name="genero" id="genero" class="form-control" >
+                  <option value="Hembra">Hembra</option>
+                  <option value="Macho">Macho</option>
+                </select>
+                
+              </div>
+             
+              <div class="form-group">
+                <label for="propietario">Propietario</label>
+                <input readonly  #propietario="ngModel" [ngModel]="usuario.name" name="propietario" id="propietario" type="text" class="form-control"> 
+              </div>
+
+
               <div class="form-group">
                 <div *ngIf="currentFileUpload" class="progress" style="width:400px">
                   <div class="progress-bar progress-bar-info progress-bar-striped"
@@ -30,39 +60,35 @@
                     {{progress.percentage}}%</div>
                 </div>
               </div>
-
-              <div class="form-group">
-                <label for="categoria">Género</label>
-                <select ngModel name="categoria" id="categoria" class="form-control" >
-                  <option value="Perro">Hembra</option>
-                  <option value="Gato">Macho</option>
-                </select>
-                
-              </div>
-             
-              <div class="form-group">
-                <label for="propietario">Propietario</label>
-                <input readonly [ngModel]="usuario.name" name="propietario" id="propietario" type="text" class="form-control"> 
-              </div>
-
-              
+                            
               
               <label class="btn btn-default"> <input type="file"
-                (change)="selectFile($event)">
-              </label>
-               
-              <button class="btn btn-success" [disabled]="!selectedFiles"
-              
-                (click)="upload()">Upload</button>
+                (change)="selectFile($event)" required>
+              </label>   
+              <br>       
 
-             
+              <button [disabled]="!selectedFiles" class="btn btn-primary">Guardar Animal</button>
 
-              <button class="btn btn-primary">Guardar Animal</button>
-
-              <button (click)="eliminar()" *ngIf="this.id"class="btn btn-dark">Eliminar Producto</button>
+              <button (click)="eliminar()" *ngIf="this.id" class="btn btn-dark">Eliminar Animal</button>
 
         
             </div>
 
         </form>
     </div>
+    <div class="col-6" *ngIf="animal">
+        <div class="card" style="width: 20rem">
+            <img class="card-img-top" [src]="animal.url" *ngIf="animal.url" alt="">
+            <div class="card-body">
+              <h4 class="card-title">{{animal.nombre}}</h4>
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><b>Genero: </b>{{animal.genero}}</li>
+                  <li class="list-group-item"><b>Tipo: </b>{{animal.categoria}}</li>
+                  <li class="list-group-item"><b>Fecha Nacimiento: </b>{{animal.fecha_nacimiento}}</li>
+                  <li class="list-group-item"><b>Propietario:</b>{{animal.propietario}}</li>
+              </ul>
+           
+        </div>
+      </div>
+    </div>
+  </div>

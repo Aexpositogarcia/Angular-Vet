@@ -94,6 +94,7 @@ import {UploadFileService} from './upload-file.service';
       {path:'detalle-pedido/:id' ,component:DetallePedidoComponent},
       
       {path:'login' ,component:LoginComponent},
+      {path:'animales-form/new' ,component:AnimalesFormComponent},
       {path:'animales-form/:id' ,component:AnimalesFormComponent},
       {path:'animales', component:AnimalesComponent},
       {path:'my/orders',component:MyOrdersComponent , canActivate:[AuthGuardService]},

@@ -1,32 +1,44 @@
 
-   <a routerLink="/animales-form" class="btn btn-primary">Nuevo Animal</a>
+   <a routerLink="/animales-form/new" class="btn btn-primary">Nuevo Animal</a>
     <br><br>
    <table class="table table-striped">
       <thead class="thead-dark">
+
         <tr>
+          <th>V.Prev</th>
           <th>Nombre Animal</th>
           <th>Categoria</th>
           <th>Propietario</th>
           <th>Fecha de Nacimiento</th>
+          <th></th>
         </tr>
+
       </thead>
       <tbody>
         <tr *ngFor="let animales of  animales$|async">
           <td>
+            <img [src]="animales.url" class="thumbnail" alt="">
+          </td>
+          <td>
             {{animales.nombre}}
           </td>
+
           <td>
             {{animales.categoria}}  
           </td>
+
           <td>
             {{animales.propietario}} 
           </td>
+
           <td>
             {{animales.fecha_nacimiento}} 
           </td>
+
           <td>
             <a [routerLink]="['/animales-form/', animales.$key]">Editar Animal</a> 
           </td>
+
         </tr>
       </tbody>
     
