@@ -5,7 +5,8 @@ import { AuthService } from '../auth.service';
 import { AppUsuarios } from '../models/app-usuarios';
 import * as firebase from 'firebase';
 import { Animal} from '../models/animales';
-import{ FileUpload } from '../models/FileUpload';
+import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import {FileUpload } from '../models/FileUpload';
 import { UploadFileService } from '../upload-file.service';
 
 @Component({
@@ -21,12 +22,18 @@ progress: {percentage: number} = {percentage: 0}
 
 id;
 animalfinal;
-
+model
 usuario:AppUsuarios;
 email;
-animal={};
-constructor(
+animal:Animal;
+today;
+todays:string ;
+dd;
+mm;
+yyyy;
 
+constructor(
+  private parserFormatter: NgbDateParserFormatter,
   private auth:AuthService,
   private route: ActivatedRoute,
   private animaleservice:AnimalesService, 
@@ -35,15 +42,22 @@ constructor(
   ) { 
   //Obtener todas las categorias
   this.auth.appUser$.take(1).subscribe(appUser=>this.usuario=appUser);
-
-  
   //Obtener el id pasado por parametro
   this.id=this.route.snapshot.paramMap.get('id');
   //take para indicar que el observable se completara cuando se le pase solo un objeto
-   if(this.id) this.animaleservice.obteneranimal(this.id).take(1).subscribe(p => this.animal = p);
+  if(this.id) this.animaleservice.obteneranimal(this.id).take(1).subscribe(p => this.animal = p);
   
-  //console.log(this.animal);
+    this.today = new Date();
+    this.dd = String(this.today.getDate()).padStart(2, '0');
+    this.mm = String(this.today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    this.yyyy = this.today.getFullYear();
+
+    this.today = this.mm + '/' + this.dd + '/' + this.yyyy;
+    this.todays=this.today;
+    console.log(this.today);
+    
 }
+
 
 save(animal){
   
@@ -51,13 +65,9 @@ save(animal){
 
   if(this.id){
 
-    
-    
     Object.assign(this.currentFileUpload,animal,this.usuario);
 
     this.animaleservice.actualizar(this.id,animal);
-
-    this.ruter.navigate(['/animales']);
 
     this.uploadService.pushFileToStorage(this.currentFileUpload, this.progress,this.id)
 
@@ -67,17 +77,16 @@ save(animal){
 
     console.log(this.animalfinal);
 
-    this.ruter.navigate(['/animales']);
-    
-    
-    this.uploadService.pushFileToStorage(this.currentFileUpload, this.progress,this.id)
+    this.uploadService.pushFileToStorage(this.currentFileUpload, this.progress,this.id);
   }
 }
 
 selectFile(event) {
+
   this.selectedFiles = event.target.files;
   const file = this.selectedFiles.item(0);
   this.currentFileUpload = new FileUpload(file);
+
 }
 
 

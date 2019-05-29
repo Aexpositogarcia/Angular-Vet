@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-6">
         <form #f="ngForm" (ngSubmit)="save(f.value)">
-            <div class="container">
+            <div class="container" *ngIf="animal">
               <div class="form-group">
                 <label for="nombre">Nombre</label>
 
@@ -16,8 +16,8 @@
 
                 <label for="fecha_nacimiento">Fecha Nacimiento</label>
               
-                <input #fecha_nacimiento="ngModel" [(ngModel)]="animal.fecha_nacimiento" name="fecha_nacimiento" type="text" class="form-control" id="fecha_nacimiento" required>
-                
+                <input #fecha_nacimiento="ngModel" [(ngModel)]="animal.fecha_nacimiento" name="fecha_nacimiento"   type="date" class="form-control" id="fecha_nacimiento" required>
+               
                 <div class="alert alert-danger" *ngIf="fecha_nacimiento.touched && fecha_nacimiento.invalid">
                     Se necesita poner una fecha de nacimiento.
                 </div>
@@ -30,20 +30,20 @@
                   <option value="Gato">Gato</option>
                 </select>
                 <div class="alert alert-danger" *ngIf="categoria.touched && categoria.invalid">
-                    Se necesita poner una fecha de nacimiento.
+                    Se necesita poner una categoria.
                 </div>
-                
               </div>
-              
-              
+
               <div class="form-group">
                 <label for="genero">Género</label>
-                <select #genero="ngModel" [(ngModel)]="animal.genero" name="genero" id="genero" class="form-control" >
+                <select #genero="ngModel" [(ngModel)]="animal.genero" name="genero" id="genero" class="form-control" required>
                   <option value="Hembra">Hembra</option>
                   <option value="Macho">Macho</option>
                 </select>
-                
               </div>
+              <div class="alert alert-danger" *ngIf="genero.touched && genero.invalid">
+                Se necesita poner un genero.
+              </div>  
              
               <div class="form-group">
                 <label for="propietario">Propietario</label>
@@ -65,9 +65,11 @@
               <label class="btn btn-default"> <input type="file"
                 (change)="selectFile($event)" required>
               </label>   
-              <br>       
+              <br>      
 
-              <button [disabled]="!selectedFiles" class="btn btn-primary">Guardar Animal</button>
+              <button [disabled] ="!f.valid  || !selectedFiles" class="btn btn-primary">Guardar Animal</button>
+
+              <button routerLink="/animales" class="btn btn-default">Volver</button>
 
               <button (click)="eliminar()" *ngIf="this.id" class="btn btn-dark">Eliminar Animal</button>
 
@@ -84,10 +86,9 @@
               <ul class="list-group list-group-flush">
                   <li class="list-group-item"><b>Genero: </b>{{animal.genero}}</li>
                   <li class="list-group-item"><b>Tipo: </b>{{animal.categoria}}</li>
-                  <li class="list-group-item"><b>Fecha Nacimiento: </b>{{animal.fecha_nacimiento}}</li>
+                  <li class="list-group-item"><b>Fecha Nacimiento: </b>{{animal.fecha_nacimiento | date}}</li>
                   <li class="list-group-item"><b>Propietario:</b>{{animal.propietario}}</li>
               </ul>
-           
         </div>
       </div>
     </div>
