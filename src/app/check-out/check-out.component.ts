@@ -7,6 +7,7 @@ import { PedidoService } from '../pedido.service';
 import { AuthService } from '../auth.service';
 import { Pedido } from '../models/Pedido';
 import { RouterLink, Router } from '@angular/router';
+import { ServicioEmailService } from '../servicio-email.service';
 
 @Component({
   selector: 'app-check-out',
@@ -16,6 +17,7 @@ import { RouterLink, Router } from '@angular/router';
 export class CheckOutComponent implements OnInit, OnDestroy{
 
   constructor(
+    private emailservice:ServicioEmailService,
     private route: Router,
     private authservice: AuthService,
     private pedidoservicio: PedidoService,
@@ -54,6 +56,7 @@ export class CheckOutComponent implements OnInit, OnDestroy{
     let pedidos=new Pedido(this.userId, this.pedido, this.carrito)
 
     let resultado=await this.pedidoservicio.guardarPedido(pedidos);
+    this.emailservice.sendEmail();
     this.shoppingcartservice.LimpiarCarro();
     this.route.navigate(['/pedido-exitoso',resultado.key])
     

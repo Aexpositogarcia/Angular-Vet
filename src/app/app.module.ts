@@ -25,7 +25,7 @@ import {VeterinarioAuthGuardService} from './veterinario-auth-guard.service';
 import { UserService } from './user.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {ProductService} from'./product.service';
 import {AnimalesService} from './animales.service';
@@ -43,6 +43,11 @@ import { ResumenCarritoComponent } from './resumen-carrito/resumen-carrito.compo
 import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 
 import {UploadFileService} from './upload-file.service';
+import { ComponenteEmailComponent } from './componente-email/componente-email.component';
+import { ServicioEmailService } from './servicio-email.service';
+import { HttpModule,Http } from '@angular/http';
+import { VerTodasCitasComponent } from './ver-todas-citas/ver-todas-citas.component';
+import { VerMisCitasComponent } from './ver-mis-citas/ver-mis-citas.component';
 
 
 
@@ -68,7 +73,10 @@ import {UploadFileService} from './upload-file.service';
     VercitasVeterinarioComponent,
     PedircitaComponent,
     ResumenCarritoComponent,
-    DetallePedidoComponent,   
+    DetallePedidoComponent,
+    ComponenteEmailComponent,
+    VerTodasCitasComponent,
+    VerMisCitasComponent,   
    
   ],
   imports: [
@@ -78,13 +86,16 @@ import {UploadFileService} from './upload-file.service';
     
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    HttpModule,
+    ReactiveFormsModule,
     NgbModule.forRoot(),
     AngularFireDatabaseModule,
     CustomFormsModule,
     RouterModule.forRoot([
-
+      
       {path:'' ,component:ProductsComponent},
-      {path:'vercitasveterinario' ,component:VercitasVeterinarioComponent},
+      {path:'vercitasveterinario' ,component:VercitasVeterinarioComponent,canActivate:[AuthGuardService]},
+      {path:'vermiscitas',component:VerMisCitasComponent},
       {path:'products' ,component:ProductsComponent},
       {path:'pedircita' ,component:PedircitaComponent},
       {path:'shopping-cart' ,component:ShoppingCartComponent},
@@ -109,9 +120,11 @@ import {UploadFileService} from './upload-file.service';
   ],
 
   providers: [
+    
     AuthService,
     AuthGuardService,
     UserService,
+    ServicioEmailService,
     VeterinarioAuthGuardService,
     AdminAuthGuardService,
     CategoryService,

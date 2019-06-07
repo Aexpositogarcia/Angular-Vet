@@ -2,16 +2,16 @@
 <table class="table table-striped">
     <thead class="thead-dark">
       <tr>
-        <th>Nombre</th>
+        <th>Ficha-Animal</th>
         <th>Descripcion</th>
-        <th>Propietario</th>
+        <th>Contacto</th>
         <th>Fecha</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let prod of  todos$">
         <td>
-          {{prod.nombre}}
+          <a [routerLink]="['/animales-form/', prod.animal]">Mascota</a> 
         </td>
         <td>
           {{prod.descripcion}}  

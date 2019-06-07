@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-6">
-        <form #f="ngForm" (ngSubmit)="save(f.value)">
-            <div class="container" *ngIf="animal">
+        <form #formanimales="ngForm" (ngSubmit)="save(formanimales.value)">
+            <div class="container">
               <div class="form-group">
                 <label for="nombre">Nombre</label>
 
@@ -10,18 +10,13 @@
                 <div class="alert alert-danger" *ngIf="nombre.touched && nombre.invalid">
                   Se necesita poner un titulo.
                 </div>
-              
               </div>
               <div class="form-group">
-
                 <label for="fecha_nacimiento">Fecha Nacimiento</label>
-              
                 <input #fecha_nacimiento="ngModel" [(ngModel)]="animal.fecha_nacimiento" name="fecha_nacimiento"   type="date" class="form-control" id="fecha_nacimiento" required>
-               
                 <div class="alert alert-danger" *ngIf="fecha_nacimiento.touched && fecha_nacimiento.invalid">
                     Se necesita poner una fecha de nacimiento.
                 </div>
-              
               </div>   
               <div class="form-group">
                 <label for="categoria">Categoria</label>
@@ -47,7 +42,7 @@
              
               <div class="form-group">
                 <label for="propietario">Propietario</label>
-                <input readonly  #propietario="ngModel" [ngModel]="usuario.name" name="propietario" id="propietario" type="text" class="form-control"> 
+                <input readonly  #propietario="ngModel" [(ngModel)]="usuario.name" name="propietario" id="propietario" type="text" class="form-control"> 
               </div>
 
 
@@ -67,9 +62,9 @@
               </label>   
               <br>      
 
-              <button [disabled] ="!f.valid  || !selectedFiles" class="btn btn-primary">Guardar Animal</button>
+              <button [disabled] ="!formanimales.valid  || !selectedFiles" class="btn btn-primary">Guardar Animal</button>
 
-              <button routerLink="/animales" class="btn btn-default">Volver</button>
+              <button routerLink="/animales" class="btn btn-secondary">Volver</button>
 
               <button (click)="eliminar()" *ngIf="this.id" class="btn btn-dark">Eliminar Animal</button>
 
@@ -78,16 +73,16 @@
 
         </form>
     </div>
-    <div class="col-6" *ngIf="animal">
+    <div class="col-6" >
         <div class="card" style="width: 20rem">
-            <img class="card-img-top" [src]="animal.url" *ngIf="animal.url" alt="">
+            <img class="card-img-top" [src]="animal.url" alt="">
             <div class="card-body">
               <h4 class="card-title">{{animal.nombre}}</h4>
               <ul class="list-group list-group-flush">
                   <li class="list-group-item"><b>Genero: </b>{{animal.genero}}</li>
                   <li class="list-group-item"><b>Tipo: </b>{{animal.categoria}}</li>
                   <li class="list-group-item"><b>Fecha Nacimiento: </b>{{animal.fecha_nacimiento | date}}</li>
-                  <li class="list-group-item"><b>Propietario:</b>{{animal.propietario}}</li>
+                  <li class="list-group-item"><b>Propietario:</b>{{usuario.name}}</li>
               </ul>
         </div>
       </div>

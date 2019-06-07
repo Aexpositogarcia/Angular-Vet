@@ -1,45 +1,61 @@
-<div class="row">
-    <div class="col-6">
-        <form #f="ngForm" (ngSubmit)="save(f.value)">
 
-            <div class="container" *ngIf="animales$ && usuario">
-                
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <select ngModel name="nombre"  id="nombre" class="form-control"  >
-                        <option value=""></option>
-                          <option *ngFor="let c of animales$|async"[value]="c.nombre">
-                            {{c.nombre}}
-                        </option>
-                    </select>
-                </div>
+<section id="cover">
+  <div id="cover-caption">
+      <div id="container" class="container">
+          <div class="row">
+              <div class="col-sm-10 offset-sm-1">
 
-              <div class="form-group">
-                <label for="descripcion">Descripcion</label>
-                <textarea ngModel name="descripcion" id="descripcion" type="text" class="form-control" d ></textarea>
-              </div>    
-                  
-              <label for="fecha">Fecha</label>
-              
-              <!-- DATE PICKER -->
-              <!-- DATE PICKER -->
-              <br>
+                <form [formGroup]="eform" (ngSubmit)="save(eform.value)">
 
-              <input ngModel name="fecha" type="date" class="form-control" id="fecha" >
+                    <div class="container" *ngIf="animales$ && usuario">
+                        
+                      <div class="form-group">
+                          <label for="nombre">Nombre</label>
+                          <select  formControlName="animal" ngModel name="animal"  id="animal" class="form-control"  >
+                              <option value=""></option>
+                                <option *ngFor="let c of animales$|async"[value]="c.$key">
+                                  {{c.nombre}}
+                              </option>
+                          </select>
+                      </div>
 
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input readonly [ngModel]="usuario.email" name="email" id="email" type="text" class="form-control"> 
+                      <div class="alert  alert-danger" *ngIf="eform.get('animal').hasError('required') && eform.get('animal').touched">
+                        Introduce un Animal
+                      </div> 
+
+                      <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+                        <textarea placeholder="Describe brevemente el problema..." formControlName="descripcion" ngModel name="descripcion" id="descripcion" type="text" class="form-control" d ></textarea>
+                      </div>    
+                      <div class="alert  alert-danger" *ngIf="eform.get('descripcion').hasError('required') && eform.get('descripcion').touched">
+                        Se necesita descripcion
+                      </div> 
+                      
+                      <div class="form-group">
+                        <label for="fecha">Fecha</label>
+                        <input formControlName="fecha" (change)="comprobacionfecha($event.target.value)" ngModel name="fecha" type="date" class="form-control" id="fecha" >
+                      </div>
+                      
+                      
+                      <div class="alert  alert-danger" *ngIf="eform.get('fecha').hasError('required') && eform.get('fecha').touched">
+                        Se necesita una fecha
+                      </div> 
+
+                      <div class="alert alert-warning" *ngIf="!existe && eform.get('fecha').touched">
+                        Esta fecha no esta disponible
+                      </div> 
+
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input formControlName="email" readonly [ngModel]="usuario" name="email" id="email" type="text" class="form-control"> 
+                      </div>
+                    
+                      <button [disabled] = "!eform.valid || !existe" class="btn btn-primary">Pedir Cita</button>
+                      <button (click)="eliminar()" *ngIf="this.id"class="btn btn-dark">Eliminar Producto</button>
+                    </div>
+                </form>
               </div>
-
-              <div class="form-group">
-                      <label for="parte">Parte</label>
-                      <textarea ngModel name="parte" id="parte" type="text" class="form-control" d></textarea>
-              </div>    
-              
-
-              <button class="btn btn-primary">Pedir Cita</button>
-              <button (click)="eliminar()" *ngIf="this.id"class="btn btn-dark">Eliminar Producto</button>
             </div>
-        </form>
-    </div>
+          </div>
+        </div>
+      </section>

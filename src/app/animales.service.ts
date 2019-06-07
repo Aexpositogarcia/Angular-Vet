@@ -49,15 +49,17 @@ export class AnimalesService {
     return this.db.list('/animales');
 
   }
- obteneranimalesacutal(email){
+ obteneranimalesacutal(email: string){
+
+  console.log(email);
     return this.db.list('/animales',{
       query:{
         orderByChild:'email',
         equalTo:email
       }
     });
-    
   }
+  
   obteneranimal(animalid){
 
     return this.db.object('/animales/' + animalid);

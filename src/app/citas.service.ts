@@ -15,6 +15,16 @@ export class CitasService {
     return this.db.object('/citas/' + idcita).update(cita);
 
   }
+  obtenerfecha(fecha){
+    return this.db.list('/citas', {
+      query: {
+        orderByChild: 'fecha',
+        equalTo: fecha        
+      }
+    });
+  
+
+  }
 
   obtenertodos(){
 

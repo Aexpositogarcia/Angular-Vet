@@ -9,12 +9,22 @@ import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstra
 import {FileUpload } from '../models/FileUpload';
 import { UploadFileService } from '../upload-file.service';
 
+
 @Component({
   selector: 'app-animales-form',
   templateUrl: './animales-form.component.html',
   styleUrls: ['./animales-form.component.css']
 })
-export class AnimalesFormComponent  {
+export class AnimalesFormComponent implements OnInit {
+  
+  async ngOnInit(){
+    await this.auth.appUser$.take(1).subscribe(appUser=>this.usuario=appUser);
+
+    console.log('###');
+    console.log(this.usuario.name);
+  }
+
+animal={};
 
 selectedFiles: FileList
 currentFileUpload: FileUpload
@@ -25,7 +35,7 @@ animalfinal;
 model
 usuario:AppUsuarios;
 email;
-animal:Animal;
+
 today;
 todays:string ;
 dd;
@@ -41,27 +51,18 @@ constructor(
   private uploadService: UploadFileService
   ) { 
   //Obtener todas las categorias
-  this.auth.appUser$.take(1).subscribe(appUser=>this.usuario=appUser);
+  
+
   //Obtener el id pasado por parametro
   this.id=this.route.snapshot.paramMap.get('id');
   //take para indicar que el observable se completara cuando se le pase solo un objeto
   if(this.id) this.animaleservice.obteneranimal(this.id).take(1).subscribe(p => this.animal = p);
-  
-    this.today = new Date();
-    this.dd = String(this.today.getDate()).padStart(2, '0');
-    this.mm = String(this.today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    this.yyyy = this.today.getFullYear();
-
-    this.today = this.mm + '/' + this.dd + '/' + this.yyyy;
-    this.todays=this.today;
-    console.log(this.today);
+  if(this.id) console.log('entra');
     
 }
 
 
 save(animal){
-  
-  
 
   if(this.id){
 
@@ -76,6 +77,7 @@ save(animal){
     Object.assign(this.currentFileUpload,animal,this.usuario);
 
     console.log(this.animalfinal);
+    console.log('Entra alta');
 
     this.uploadService.pushFileToStorage(this.currentFileUpload, this.progress,this.id);
   }
