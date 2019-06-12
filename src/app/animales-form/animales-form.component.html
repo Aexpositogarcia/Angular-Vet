@@ -79,7 +79,8 @@
             <div class="card-body">
               <h4 class="card-title">{{animal.nombre}}</h4>
               <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><b>Genero: </b>{{animal.genero}}</li>
+                  <li class="list-group-item" *ngIf="animal.genero == 'Macho' "><b>Genero: </b> <i class="fa fa-mars" aria-hidden="true"></i></li>
+                  <li class="list-group-item" *ngIf="animal.genero == 'Hembra' "><b>Genero: </b> <i class="fa fa-venus" aria-hidden="true"></i></li>
                   <li class="list-group-item"><b>Tipo: </b>{{animal.categoria}}</li>
                   <li class="list-group-item"><b>Fecha Nacimiento: </b>{{animal.fecha_nacimiento | date}}</li>
                   <li class="list-group-item"><b>Propietario: </b>{{usuario.name}}</li>
