@@ -3,8 +3,15 @@
   <div id="cover-caption">
       <div id="container" class="container">
           <div class="row">
+              
               <div class="col-sm-10 offset-sm-1">
-
+                  <div class = "page-header">
+   
+                      <h1>
+                          Pedir Cita
+                      </h1>
+                      
+                    </div>
                 <form [formGroup]="eform" (ngSubmit)="save(eform.value)">
 
                     <div class="container" *ngIf="animales$ && usuario">
@@ -43,6 +50,9 @@
 
                       <div class="alert alert-warning" *ngIf="!existe && eform.get('fecha').touched">
                         Esta fecha no esta disponible
+                      </div>
+                      <div class="alert alert-warning" *ngIf="!posterior && eform.get('fecha').touched">
+                        Fin de semana o fecha pasada
                       </div> 
 
                       <div class="form-group">
@@ -50,7 +60,7 @@
                         <input formControlName="email" readonly [ngModel]="usuario" name="email" id="email" type="text" class="form-control"> 
                       </div>
                     
-                      <button [disabled] = "!eform.valid || !existe" class="btn btn-primary">Pedir Cita</button>
+                      <button [disabled] = "!eform.valid || !existe ||!posterior" class="btn btn-primary">Pedir Cita</button>
                       <button (click)="eliminar()" *ngIf="this.id"class="btn btn-dark">Eliminar Producto</button>
                     </div>
                 </form>

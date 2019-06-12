@@ -35,7 +35,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { AnimalesFormComponent } from './animales-form/animales-form.component';
 import { AnimalesComponent } from './animales/animales.component';
 import { VercitasVeterinarioComponent } from './vercitas-veterinario/vercitas-veterinario.component';
-
+import {DatePipe} from '@angular/common';
 import { PedircitaComponent } from './pedircita/pedircita.component';
 import {CitasService} from './citas.service';
 import { PedidoService } from './pedido.service';
@@ -120,7 +120,7 @@ import { VerMisCitasComponent } from './ver-mis-citas/ver-mis-citas.component';
   ],
 
   providers: [
-    
+    DatePipe,
     AuthService,
     AuthGuardService,
     UserService,

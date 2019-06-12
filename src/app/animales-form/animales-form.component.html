@@ -42,7 +42,7 @@
              
               <div class="form-group">
                 <label for="propietario">Propietario</label>
-                <input readonly  #propietario="ngModel" [(ngModel)]="usuario.name" name="propietario" id="propietario" type="text" class="form-control"> 
+                <input *ngIf="usuario.name" readonly  #propietario="ngModel" [(ngModel)]="usuario.name" name="propietario" id="propietario" type="text" class="form-control"> 
               </div>
 
 
@@ -82,9 +82,47 @@
                   <li class="list-group-item"><b>Genero: </b>{{animal.genero}}</li>
                   <li class="list-group-item"><b>Tipo: </b>{{animal.categoria}}</li>
                   <li class="list-group-item"><b>Fecha Nacimiento: </b>{{animal.fecha_nacimiento | date}}</li>
-                  <li class="list-group-item"><b>Propietario:</b>{{usuario.name}}</li>
+                  <li class="list-group-item"><b>Propietario: </b>{{usuario.name}}</li>
               </ul>
         </div>
       </div>
     </div>
   </div>
+  <br>
+ <div class="row" *ngIf="id">
+    <div class = "page-header">
+   
+        <h1>
+           Citas
+        </h1>
+        
+    </div>
+   <div class="col-12">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+        <table class="table table-bordered table-striped mb-0">
+          <thead class="table-primary">
+            <tr>
+              <th scope="col">Fecha</th>
+              <th scope="col">Descripcion</th>
+
+              
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let cita of  citas$|async">
+
+                  <td>
+                    {{cita.fecha | date}}
+                  </td>
+        
+                  <td>
+                    {{cita.descripcion}}  
+                  </td>
+                </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <br>

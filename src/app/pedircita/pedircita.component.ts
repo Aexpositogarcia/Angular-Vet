@@ -19,11 +19,13 @@ export class PedircitaComponent  {
   usuario;
   eform: FormGroup;
   existe:boolean;
+  posterior:boolean;
 
   async ngOnInit(){
 
    await this.auth.appUser$.take(1).subscribe(usuario=>this.usuario=usuario.email);
     console.log(this.usuario);
+    //al recargar la pagina no le da tiempo a obtener todos los datos
   this.animales$=this.animaleservicio.obteneranimalesacutal(this.usuario);
 
    this.eform= new FormGroup({
@@ -31,7 +33,8 @@ export class PedircitaComponent  {
       descripcion: new FormControl("",Validators.required),
       fecha:new FormControl("", Validators.compose([
         Validators.required,
-        Validators.apply(this.existe)
+        Validators.apply(this.existe),
+        Validators.apply(this.posterior),
        
      ])),
      email:new FormControl(),
@@ -46,8 +49,7 @@ export class PedircitaComponent  {
   animales$:Observable<Animal[]>;
  
   constructor(private ruter: Router ,private auth:AuthService ,private citaservice:CitasService,private animaleservicio:AnimalesService) { 
-    //this.nombres$=auth.appUser$.switchMap(u=>animaleservicio.obteneranimalesacutal(u.email));   
-
+    //this.nombres$=auth.appUser$.switchMap(u=>animaleservicio.obteneranimalesacutal(u.email);
   }
   
 
@@ -89,8 +91,16 @@ export class PedircitaComponent  {
         },
         error => {
             console.log("EE:",error);
-        }
-);
+        });
+      let fechaposterior=new Date();
+      let fechactual=new Date(fecha);
+      var isWeekend = fechactual.getDay()%6==0;
+      if(fechaposterior > fechactual || isWeekend ){
+        console.log('####');
+        this.posterior=false;
+      }else{
+        this.posterior=true;
+      }
   }
 
   

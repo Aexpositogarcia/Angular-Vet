@@ -8,6 +8,9 @@ import { Animal} from '../models/animales';
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import {FileUpload } from '../models/FileUpload';
 import { UploadFileService } from '../upload-file.service';
+import { CitasService } from '../citas.service';
+import { Cita } from '../models/cita';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -19,7 +22,9 @@ export class AnimalesFormComponent implements OnInit {
   
   async ngOnInit(){
     await this.auth.appUser$.take(1).subscribe(appUser=>this.usuario=appUser);
-
+    if(this.id) {
+      this.citas$=this.citaservicio.obtenerporanimal(this.id);
+    }
     console.log('###');
     console.log(this.usuario.name);
   }
@@ -35,7 +40,7 @@ animalfinal;
 model
 usuario:AppUsuarios;
 email;
-
+citas$:Observable<Cita[]>;
 today;
 todays:string ;
 dd;
@@ -48,15 +53,18 @@ constructor(
   private route: ActivatedRoute,
   private animaleservice:AnimalesService, 
   private ruter: Router,
-  private uploadService: UploadFileService
+  private uploadService: UploadFileService,
+  private citaservicio: CitasService,
+
   ) { 
   //Obtener todas las categorias
-  
-
-  //Obtener el id pasado por parametro
+   //Obtener el id pasado por parametro
   this.id=this.route.snapshot.paramMap.get('id');
   //take para indicar que el observable se completara cuando se le pase solo un objeto
-  if(this.id) this.animaleservice.obteneranimal(this.id).take(1).subscribe(p => this.animal = p);
+  if(this.id) {
+    this.animaleservice.obteneranimal(this.id).take(1).subscribe(p => this.animal = p);
+
+  }
   if(this.id) console.log('entra');
     
 }

@@ -17,29 +17,29 @@
       <!--Muestra el li si el usuario no esta registrado-->
       <ng-template #anonymusUser>
           <li  class="nav-item">
-              <a class="nav-link" routerLink="login">Login </a>
+              <a class="nav-link" routerLink="login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login </a>
           </li>
       </ng-template>
 
        <!--Muestra el nombre del usuario que esta registrado-->
       <li ngbDropdown *ngIf="usuario; else anonymusUser " class="nav-item dropdown " >
         <a   ngbDropdownToggle class="nav-link dropdown-toggle"   id="dropdown01" data-toggle="dropdown"  
-        aria-expanded="false">{{usuario.name}}</a>
+        aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> {{usuario.name}}</a>
         <div  ngbDropdownMenu class="dropdown-menu show " aria-labelledby="dropdown01">
-          <a class="dropdown-item" routerLink="/my/orders">Mis pedidos</a>
-          <a class="dropdown-item" routerLink="/animales">Mis animales</a>
-          <a class="dropdown-item" routerLink="/pedircita">Pedir cita</a>
-          
+          <a class="dropdown-item" routerLink="/my/orders"><i class="fa fa-book" aria-hidden="true"></i> Mis pedidos</a>
+          <a class="dropdown-item" routerLink="/animales"><i class="fa fa-paw" aria-hidden="true"></i> Mis animales</a>
+          <a class="dropdown-item" routerLink="/pedircita"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Pedir cita</a>
+          <a class="dropdown-item" routerLink="/vermiscitas"><i class="fa fa-calendar-o" aria-hidden="true"></i> Ver Mis citas</a>
           
           <ng-container *ngIf="usuario.isAdmin">
-            <a class="dropdown-item" routerLink="/admin/orders">Administrar Pedidos</a>
-            <a class="dropdown-item" routerLink="/admin/products">Administrar Productos</a>
+            <a class="dropdown-item" routerLink="/admin/orders"><i class="fa fa-archive" aria-hidden="true"></i> Administrar Pedidos</a>
+            <a class="dropdown-item" routerLink="/admin/products"><i class="fa fa-truck" aria-hidden="true"></i> Administrar Productos</a>
           </ng-container>
           <ng-container *ngIf="usuario.isVeterinario">
-              <a class="dropdown-item" routerLink="vercitasveterinario">Ver Citas</a>
+              <a class="dropdown-item" routerLink="vercitasveterinario"> <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Ver Citas</a>
           </ng-container>
           
-          <a class="dropdown-item"(click)="logout()">Salir</a>
+          <a class="dropdown-item"(click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Salir</a>
         </div>
       </li>
     

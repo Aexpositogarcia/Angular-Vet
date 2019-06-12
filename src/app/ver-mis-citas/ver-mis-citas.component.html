@@ -1,3 +1,109 @@
-<p>
-  ver-mis-citas works!
-</p>
+
+    <div class = "page-header">
+   
+        <h1>
+           Hoy
+        </h1>
+        
+      </div>
+      
+      <table class="table table-striped">
+        <thead class="table-info">
+          <tr>
+            <th>Ficha-Animal</th>
+            <th>Descripcion</th>
+            <th>Contacto</th>
+            <th>Fecha</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prod of  fechahoy ">
+            <td>
+              <a [routerLink]="['/animales-form/', prod.animal]">Mascota</a> 
+            </td>
+            <td>
+              {{prod.descripcion}}  
+            </td>
+            <td>
+              {{prod.email}}
+            </td>
+            <td>
+              {{prod.fecha | date}} 
+            </td>
+            <td>
+                <a (click)="eliminarcita(prod.$key)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   
+  <h1>
+     Proximas citas
+  </h1>
+  
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>Ficha-Animal</th>
+      <th>Descripcion</th>
+      <th>Contacto</th>
+      <th>Fecha</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prod of  fechafuturas ">
+      <td>
+        <a [routerLink]="['/animales-form/', prod.animal]">Mascota</a> 
+      </td>
+      <td>
+        {{prod.descripcion}}  
+      </td>
+      <td>
+        {{prod.email}}
+      </td>
+      <td>
+        {{prod.fecha |date}} 
+      </td>
+      <td>
+        <a (click)="eliminarcita(prod.$key)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class = "page-header">
+   
+  <h1>
+     Historial de Citas   
+  </h1>
+  
+</div>
+
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Ficha-Animal</th>
+      <th>Descripcion</th>
+      <th>Contacto</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prod of  fechaspasadas ">
+      <td>
+        <a [routerLink]="['/animales-form/', prod.animal]">Mascota</a> 
+      </td>
+      <td>
+        {{prod.descripcion}}  
+      </td>
+      <td>
+        {{prod.email}}
+      </td>
+      <td>
+        {{prod.fecha | date}} 
+      </td>
+    </tr>
+  </tbody>
+</table>
