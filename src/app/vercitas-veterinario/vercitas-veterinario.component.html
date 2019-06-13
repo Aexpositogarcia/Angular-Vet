@@ -46,10 +46,10 @@
 <table class="table table-striped">
   <thead class="thead-dark">
     <tr>
-      <th>Ficha-Animal</th>
       <th>Descripcion</th>
       <th>Contacto</th>
       <th>Fecha</th>
+      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -82,14 +82,20 @@
 <table class="table table-striped">
   <thead class="thead-light">
     <tr>
+      <th>Estado</th>
       <th>Ficha-Animal</th>
       <th>Descripcion</th>
       <th>Contacto</th>
       <th>Fecha</th>
+      <th>Parte Medico</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let prod of  fechaspasadas ">
+      <td>
+          <i style="color:green" *ngIf="prod.parte !=''"class="fa fa-check fa-2x" aria-hidden="true"></i>
+          <i style="color:red"*ngIf="prod.parte ==''"class="fa fa-times fa-2x" aria-hidden="true"></i>
+      </td>
       <td>
         <a [routerLink]="['/animales-form/', prod.animal]">Mascota</a> 
       </td>
@@ -101,6 +107,9 @@
       </td>
       <td>
         {{prod.fecha | date}} 
+      </td>
+      <td>
+        <a [routerLink]="['/crear-parte/', prod.$key]"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a> 
       </td>
     </tr>
   </tbody>

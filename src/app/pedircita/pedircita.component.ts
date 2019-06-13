@@ -7,6 +7,7 @@ import { AppUsuarios } from '../models/app-usuarios';
 import { Animal } from '../models/animales';
 import { Observable } from 'rxjs';
 import { FormGroup, Validators, FormControl, EmailValidator } from '@angular/forms';
+import { Cita } from '../models/cita';
 
 
 @Component({
@@ -38,7 +39,7 @@ export class PedircitaComponent  {
        
      ])),
      email:new FormControl(),
-     parte:new FormControl("", )
+     parte:new FormControl()
     });
   }
 
@@ -53,7 +54,7 @@ export class PedircitaComponent  {
   }
   
 
-  save(cita){
+  save(cita:Cita){
 
     if(this.id){
       this.citaservice.actualizar(this.id,cita);

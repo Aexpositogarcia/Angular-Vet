@@ -41,7 +41,7 @@ import {CitasService} from './citas.service';
 import { PedidoService } from './pedido.service';
 import { ResumenCarritoComponent } from './resumen-carrito/resumen-carrito.component';
 import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
-
+import { CrearParteComponent } from './crear-parte/crear-parte.component';
 import {UploadFileService} from './upload-file.service';
 import { ComponenteEmailComponent } from './componente-email/componente-email.component';
 import { ServicioEmailService } from './servicio-email.service';
@@ -72,6 +72,7 @@ import { VerMisCitasComponent } from './ver-mis-citas/ver-mis-citas.component';
     AnimalesComponent,
     VercitasVeterinarioComponent,
     PedircitaComponent,
+    CrearParteComponent,
     ResumenCarritoComponent,
     DetallePedidoComponent,
     ComponenteEmailComponent,
@@ -101,9 +102,9 @@ import { VerMisCitasComponent } from './ver-mis-citas/ver-mis-citas.component';
       {path:'shopping-cart' ,component:ShoppingCartComponent},
       {path:'check-out' ,component:CheckOutComponent, canActivate:[AuthGuardService]},
       {path:'pedido-exitoso/:id' ,component:OrderSuccessComponent, canActivate:[AuthGuardService]},
-
+      {path:'crear-parte/:id' ,component:CrearParteComponent},
       {path:'detalle-pedido/:id' ,component:DetallePedidoComponent},
-      
+      {path:'animales-form/:id' ,component:AnimalesFormComponent},
       {path:'login' ,component:LoginComponent},
       {path:'animales-form/new' ,component:AnimalesFormComponent},
       {path:'animales-form/:id' ,component:AnimalesFormComponent},

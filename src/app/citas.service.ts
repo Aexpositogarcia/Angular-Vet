@@ -9,12 +9,16 @@ export class CitasService {
 
 
   crear(cita){
+
     return this.db.list('/citas').push(cita);
   }
   actualizar(idcita,cita){
 
     return this.db.object('/citas/' + idcita).update(cita);
 
+  }
+  actualizarparte(idcita,parte){
+    return this.db.object('/citas/' + idcita).update(parte);
   }
   obtenerfecha(fecha){
     return this.db.list('/citas', {
@@ -76,7 +80,7 @@ export class CitasService {
     return this.db.list('/citas');
 
   }
-  obtenerproducto(idcita){
+  obtenercita(idcita:string){
 
     return this.db.object('/citas/' + idcita);
 

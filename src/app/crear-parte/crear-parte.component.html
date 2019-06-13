@@ -1,0 +1,53 @@
+
+  <div class="row">
+    <div class="col-6">
+      <div class="card">
+        <img class="card-img-top" src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/oslo.jpg" alt="Bologna">
+        <div class="card-body text-center">
+          <img class="avatar rounded-circle" [src]="animal.url">
+          <h4 class="card-title">Propietario: {{animal.propietario }}</h4>
+          <h6 class="card-subtitle mb-2 text-muted">{{cita.fecha | date}}</h6>
+          <p class="card-text h4">{{cita.descripcion}}</p>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Nombre animal: {{animal.nombre}}</h5>
+              <p class="card-text"><b>Fecha de nacimiento: </b>{{animal.fecha_nacimiento |date}}</p>
+            </div>
+            <div class="card-footer">
+              <div class="float-left">
+                  <label class="card-subtitle mb-2 text-muted h5" >Categoria:  {{animal.categoria}} <i class="fa fa-paw" aria-hidden="true"></i></label>
+              </div>
+              <div class="float-right text-center">
+                <label class="card-subtitle mb-2 text-muted h5" *ngIf="animal.genero=='Macho'">Genero: <i class="fa fa-mars" aria-hidden="true"> </i></label>
+                <label class="card-subtitle mb-2 text-muted h5" *ngIf="animal.genero=='Hembra'">Genero: <i class="fa fa-venus" aria-hidden="true"> </i></label>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+      
+
+
+    <div class="col-6">
+        <form #f="ngForm" (ngSubmit)="save(f.value)">
+            <div class="form-group">
+
+                <div class="form-group">
+                  <div class="page-header">
+                    <h1>
+                      Parte Medico
+                    </h1>
+                  </div>
+                  <textarea  #parte="ngModel" [(ngModel)]="parte.casa" id="parte" class="form-control" value={{cita.parte}} name="parte" rows="23" required></textarea>
+                </div>
+            </div>
+            <button  class="btn btn-info">Guardar</button>        
+        </form>
+
+      </div>
+  </div>
+
+  
