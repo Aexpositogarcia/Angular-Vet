@@ -1,4 +1,4 @@
-# Tienda de Animales
+# Vet
 
 This project was enerated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.10.
 
